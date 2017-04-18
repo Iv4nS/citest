@@ -28,11 +28,16 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void btnManualInstall(View view) {
-        Intent i = new Intent("com.android.vending.INSTALL_REFERRER");
-        //i.setPackage(this.getPackageName()); //com.playmoneymedia.pmmshowcase) //referrer is a composition of the parameter of the campaing
+        Intent i = new Intent(null, MainActivity.class);
         i.putExtra("referrer", "126733777");
-        sendBroadcast(i);
-        //ConnectTracker connectTracker = new ConnectTracker();
-        //connectTracker.onReceive(context, intent);
+
+        ConnectTracker connectTracker = new ConnectTracker();
+        connectTracker.onReceive(MainActivity.this, i);
+
+        //sendBroadcast(i);
+        //i.setPackage(this.getPackageName()); //com.playmoneymedia.pmmshowcase) //referrer is a composition of the parameter of the campaing
+        //getBaseContext() -> works
+        //MainActivity.this -> works
+        //getApplicationContext() -> works
     }
 }
